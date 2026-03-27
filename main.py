@@ -25,7 +25,7 @@ class StartRequest(BaseModel):
 class SensorData(BaseModel):
     moisture: float
     temperature: float
-    color: int
+    rgb: int
 
 
 # ----------------------------
@@ -33,7 +33,7 @@ class SensorData(BaseModel):
 # ----------------------------
 @app.post("/start-test")
 def start_test(data: StartRequest):
-    global current_batch_id, is_running
+    global current_batch_id, is_running 
 
     if is_running:
         return {"status": "already running"}
