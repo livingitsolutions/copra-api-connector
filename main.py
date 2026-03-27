@@ -96,7 +96,7 @@ def run_test_loop():
             sensor_data = latest_sensor_data
 
             # CALL ML MODEL
-            predict_res = requests.get(PREDICT_API, params=sensor_data)
+            predict_res = requests.post(PREDICT_API, params=sensor_data)
 
             if predict_res.status_code != 200:
                 print("Prediction failed")
