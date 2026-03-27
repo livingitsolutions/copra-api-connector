@@ -114,6 +114,8 @@ def run_test_loop():
                 "lr_grade": prediction.get("Logistic Regression"),
             }
 
+            print(f"Payload to be sent ({payload})")
+
             requests.post(
                 f"{LARAVEL_API}/batch/{current_batch_id}/samples",
                 json=payload
