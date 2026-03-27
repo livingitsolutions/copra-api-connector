@@ -1,7 +1,8 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
+import requests
 import threading
 import time
-import requests
 
 app = FastAPI()
 
