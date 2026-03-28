@@ -180,7 +180,11 @@ async def run_test_loop():
                 # 🔮 CALL ML API
                 predict_res = await client.post(
                     PREDICT_API,
-                    sensor_data
+                    json={
+                        "moisture": sensor_data["moisture"],
+                        "temperature": sensor_data["temperature"],
+                        "rgb": sensor_data["rgb"]
+                    }
                 )
 
                 if predict_res.status_code != 200:
