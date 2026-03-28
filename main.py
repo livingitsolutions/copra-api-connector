@@ -194,17 +194,22 @@ async def run_test_loop():
                     continue
 
                 prediction = predict_res.json()
+                predictions_in = prediction.get("input", {})
+                predictions_out = prediction.get("predictions", {})
+                
 
-                print(f"Prediction data: {prediction}")
+                print(f"Prediction data: {predictions_out}")
+                
 
                 # 📦 Prepare payload
                 payload = {
-                    "moisture": sensor_data["moisture"],
-                    "temperature": sensor_data["temperature"],
-                    "svm_grade": prediction.get("SVM"),
-                    "rf_grade": prediction.get("Random Forest"),
-                    "knn_grade": prediction.get("KNN"),
-                    "lr_grade": prediction.get("Logistic Regression"),
+                    "moisture": predictions_in["moisture"],
+                    "temperature": predictions_in["Temperature"],
+                    "rgb": predictions_in["RGB Color"],
+                    "svm_grade": predictions_out.get("SVM"),
+                    "rf_grade": predictions_out.get("Random Forest"),
+                    "knn_grade": predictions_out.get("KNN"),
+                    "lr_grade": predictions_out.get("Logistic Regression"),
                 }
 
                 print("Sending:", payload)
