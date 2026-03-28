@@ -203,7 +203,7 @@ async def run_test_loop():
 
                 # 📦 Prepare payload
                 payload = {
-                    "moisture": predictions_in["moisture"],
+                    "moisture": predictions_in["Moisture"],
                     "temperature": predictions_in["Temperature"],
                     "rgb": predictions_in["RGB Color"],
                     "svm_grade": predictions_out.get("SVM"),
