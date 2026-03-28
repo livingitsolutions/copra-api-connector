@@ -171,11 +171,13 @@ class SensorData(BaseModel):
 async def run_test_loop():
     global is_running, current_batch_id
 
-    async with httpx.AsyncClient(timeout=5) as client:
+    async with httpx.AsyncClient(timeout=60) as client:
         while is_running and current_batch_id is not None:
             try:
                 # Wait for sensor data (no polling!)
                 sensor_data = await sensor_queue.get()
+
+                print(f"Sensor data: {sensor_data}")
 
                 # 🔮 CALL ML API
                 predict_res = await client.post(
@@ -192,6 +194,8 @@ async def run_test_loop():
                     continue
 
                 prediction = predict_res.json()
+
+                print(f"Prediction data: {prediction}")
 
                 # 📦 Prepare payload
                 payload = {
