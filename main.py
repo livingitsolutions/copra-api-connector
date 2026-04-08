@@ -144,7 +144,7 @@ app = FastAPI()
 
 # CONFIG
 LARAVEL_API = "https://ict.ccsit.info/api"
-PREDICT_API = "https://copra-fastapi2.onrender.com/predict"
+PREDICT_API = "https://copra-fastapi3.onrender.com/predict"
 
 # STATE
 current_batch_id = None
@@ -162,7 +162,9 @@ class StartRequest(BaseModel):
 class SensorData(BaseModel):
     moisture: float
     temperature: float
-    rgb: int
+    r: int
+    g: int
+    b: int
 
 
 # ----------------------------
@@ -185,7 +187,9 @@ async def run_test_loop():
                     json={
                         "moisture": sensor_data["moisture"],
                         "temperature": sensor_data["temperature"],
-                        "rgb": sensor_data["rgb"]
+                        "r": sensor_data["r"],
+                        "g": sensor_data["g"],
+                        "b": sensor_data["b"],
                     }
                 )
 
@@ -205,7 +209,7 @@ async def run_test_loop():
                 payload = {
                     "moisture": predictions_in["Moisture"],
                     "temperature": predictions_in["Temperature"],
-                    "rgb": predictions_in["RGB Color"],
+                    "rgb": f"{predictions_in['R']} {predictions_in['G']} {predictions_in['B']}",
                     "svm_grade": predictions_out.get("SVM"),
                     "rf_grade": predictions_out.get("Random Forest"),
                     "knn_grade": predictions_out.get("KNN"),
