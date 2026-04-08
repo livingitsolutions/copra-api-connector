@@ -160,11 +160,11 @@ class StartRequest(BaseModel):
     batch_id: int
 
 class SensorData(BaseModel):
-    moisture: float
-    temperature: float
     r: int
     g: int
     b: int
+    temperature: float
+    moisture: float
 
 
 # ----------------------------
@@ -185,11 +185,11 @@ async def run_test_loop():
                 predict_res = await client.post(
                     PREDICT_API,
                     json={
-                        "moisture": sensor_data["moisture"],
-                        "temperature": sensor_data["temperature"],
                         "r": sensor_data["r"],
                         "g": sensor_data["g"],
                         "b": sensor_data["b"],
+                        "temperature": sensor_data["temperature"],
+                        "moisture": sensor_data["moisture"],
                     }
                 )
 
