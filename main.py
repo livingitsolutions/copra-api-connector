@@ -209,9 +209,9 @@ async def run_test_loop():
                 payload = {
                     "moisture": predictions_in["Moisture"],
                     "temperature": predictions_in["Temperature"],
-                    "r": predictions_in["R"],
-                    "g": predictions_in["G"],
-                    "b": predictions_in["B"],
+                    "r": sensor_data["r"],
+                    "g": sensor_data["g"],
+                    "b": sensor_data["b"],
                     "svm_grade": predictions_out.get("SVM"),
                     "rf_grade": predictions_out.get("Random Forest"),
                     "knn_grade": predictions_out.get("KNN"),
