@@ -178,7 +178,9 @@ async def run_test_loop():
             try:
                 # Wait for sensor data (no polling!)
                 sensor_data = await sensor_queue.get()
-
+                if not all(k in sensor_data for k in ("r", "g", "b")):
+                    print("⚠️ Skipping incomplete data:", sensor_data)
+                    continue
                 print(f"Sensor data: {sensor_data}")
 
                 # 🔮 CALL ML API
